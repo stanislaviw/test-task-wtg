@@ -34,6 +34,9 @@
   max-width: 1280px;
   padding: 20px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .list-items {
@@ -49,6 +52,7 @@
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .button-box {
@@ -64,8 +68,17 @@
   text-align: center;
 }
 
+.button:disabled {
+  background: #807f7f;
+  cursor: not-allowed;
+}
+
 .green {
   background: #50DD89;
+}
+
+.green:disabled:hover {
+  background: #807f7f;
 }
 
 .green:hover{
@@ -119,3 +132,16 @@
     font-size: 20px;
     color: #fff;
 } 
+
+.add-list-item {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  background-color: #F7F7F7;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { AddListItem } from "./add-new";
+import { AddListItem } from "./add-list-item";
 import { ListItem } from "./list-item";
-import { TodoItem } from "./definitions";
+import { TodoItem } from "../definitions";
 
 export const List = (): JSX.Element => {
   const [todos, setTodos] = useState<TodoItem[]>([]);
@@ -12,14 +12,24 @@ export const List = (): JSX.Element => {
       .then((json) => setTodos(json));
   }, []);
 
-  console.log(todos);
+  const removeTodoFromState = (id: number) => {
+    setTodos((prevState) => prevState.filter((item) => id !== item.id));
+  };
+
+  const addTodoToState = (item: TodoItem) => {
+    setTodos((prevState) => [item, ...prevState]);
+  };
 
   return (
     <div className="list">
-      <AddListItem />
+      <AddListItem addTodoToState={addTodoToState} />
       <div className="list-items">
         {todos.map((item) => (
-          <ListItem key={item.id} item={item} />
+          <ListItem
+            key={item.id}
+            item={item}
+            removeTodoFromState={removeTodoFromState}
+          />
         ))}
       </div>
     </div>

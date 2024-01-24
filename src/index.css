@@ -45,3 +45,8 @@ button {
   background-color: transparent;
   cursor: pointer;
 }
+
+:active, :hover, :focus {
+  outline: 0;
+  outline-offset: 0;
+}
