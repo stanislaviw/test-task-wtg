@@ -1,7 +1,18 @@
 .header {
-  height: 100px;
   width: 100%;
-  background: red;
+  background: #7255CE;
+  display: flex;
+  justify-content: center;
+}
+
+.header-box {
+  max-width: 1280px;
+  width: 100%;
+  padding: 20px;
+}
+
+.header-link {
+  color: #ffffff;
 }
 
 .container {
