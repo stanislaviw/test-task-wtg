@@ -14,16 +14,22 @@ export const ListItem = ({
   const { completed, title, id } = item;
 
   const deleteTodo = async (todoId: number) => {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${todoId}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/todos/${todoId}`,
+        {
+          method: "DELETE",
         }
-        removeTodoFromState(todoId);
-      })
-      .catch((error) => console.error("Error:", error));
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      removeTodoFromState(todoId);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
