@@ -1,3 +1,18 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.content {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
 .header {
   width: 100%;
   background: #7255CE;
@@ -15,14 +30,92 @@
   color: #ffffff;
 }
 
-.container {
+.list {
+  max-width: 1280px;
+  padding: 20px;
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
-.content {
-  width: 100%;
-  min-height: 100vh;
+.list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+
+.list-item {
+  width: 100%;
+  background-color: #F7F7F7;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-box {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  min-width: 100px;
+  text-align: center;
+}
+
+.green {
+  background: #50DD89;
+}
+
+.green:hover{
+  background: #7aeca8;
+}
+
+.blue {
+  background: #49B1F7;
+}
+
+.blue:hover{
+  background: #97cef3;
+}
+
+.red {
+  background: #ff4e4e;
+}
+
+.red:hover{
+  background: rgb(247, 126, 126);
+}
+
+.purpule {
+  background: #7255CE;
+}
+
+.purpule:hover{
+  background: #8569e2;
+}
+
+.checkbox {
+  height: 45px;
+  width: 45px;
+  border: 1px solid #7255CE;
+  cursor: pointer;
+  border-radius: 10px;
+  position: relative;
+
+}
+
+.checkbox-checked {
+  background-color: #7255CE;
+}
+
+.checkbox-checked::before {
+    content: '\2713';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #fff;
+} 
