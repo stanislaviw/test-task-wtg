@@ -6,6 +6,7 @@ type ChexboxProps = {
 export const Checkbox = ({ checked, onChange }: ChexboxProps): JSX.Element => {
   return (
     <div
+      role="button"
       onClick={onChange}
       className={`checkbox ${checked && "checkbox-checked"}`}
     ></div>

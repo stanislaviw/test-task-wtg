@@ -1,36 +1,22 @@
+// import { useState } from "react";
 import { Button } from "../common/button";
 import { Checkbox } from "../common/checkbox";
-import { TodoItem } from "../definitions";
+import { TodoItem } from "./definitions";
 
 type ListItemProps = {
   item: TodoItem;
-  removeTodoFromState: (id: number) => void;
+  removeTodo: (id: string) => void;
+  completedToggle: (id: string) => void;
 };
 
 export const ListItem = ({
   item,
-  removeTodoFromState,
+  removeTodo,
+  completedToggle,
 }: ListItemProps): JSX.Element => {
+  // const [isEdit, setIsEdit] = useState<boolean>(false);
+
   const { completed, title, id } = item;
-
-  const deleteTodo = async (todoId: number) => {
-    try {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/todos/${todoId}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      removeTodoFromState(todoId);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
 
   return (
     <div className="list-item">
@@ -39,10 +25,10 @@ export const ListItem = ({
         <Button onClick={() => console.log("lol")} type="blue">
           Edit
         </Button>
-        <Button onClick={() => deleteTodo(id)} type="red">
+        <Button onClick={() => removeTodo(id)} type="red">
           Delete
         </Button>
-        <Checkbox onChange={() => console.log("lol")} checked={completed} />
+        <Checkbox onChange={() => completedToggle(id)} checked={completed} />
       </div>
     </div>
   );

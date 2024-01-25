@@ -145,3 +145,8 @@
   border: none;
   width: 100%;
 }
+
+.placeholder {
+  width: 100%;
+  text-align: center;
+}

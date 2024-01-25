@@ -1,33 +1,25 @@
 import { useState } from "react";
 import { Button } from "../common/button";
-import { TodoItem } from "../definitions";
+import { TodoItem } from "./definitions";
+import { v4 as uuidv4 } from "uuid";
 
 type AddListItemProps = {
-  addTodoToState: (item: TodoItem) => void;
+  addTodo: (item: TodoItem) => void;
 };
 
-export const AddListItem = ({
-  addTodoToState,
-}: AddListItemProps): JSX.Element => {
+export const AddListItem = ({ addTodo }: AddListItemProps): JSX.Element => {
   const [text, setText] = useState<string>("");
 
-  // const createTodo = async (todo) => {
-  //   try {
-  //     const response = await fetch(
-  //       "https://jsonplaceholder.typicode.com/todos",
-  //       {
-  //         method: "POST",
-  //         body: JSON.stringify(todo),
-  //         headers: {
-  //           "Content-type": "application/json; charset=UTF-8",
-  //         },
-  //       }
-  //     );
-  //     // const newTodo = await response.json();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleClickButton = (): void => {
+    const newId = uuidv4();
+
+    setText("");
+    addTodo({
+      id: newId,
+      title: text,
+      completed: false,
+    });
+  };
 
   return (
     <div className="add-list-item">
@@ -37,18 +29,7 @@ export const AddListItem = ({
         onChange={(e) => setText(e.target.value)}
         value={text}
       />
-      <Button
-        onClick={() =>
-          addTodoToState({
-            id: 1,
-            userId: 1,
-            title: text,
-            completed: false,
-          })
-        }
-        type="green"
-        disabled={!text}
-      >
+      <Button onClick={handleClickButton} type="green" disabled={!text}>
         Add new
       </Button>
     </div>

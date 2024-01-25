@@ -1,36 +1,58 @@
 import { useEffect, useState } from "react";
 import { AddListItem } from "./add-list-item";
 import { ListItem } from "./list-item";
-import { TodoItem } from "../definitions";
+import { TodoItem } from "./definitions";
+import { DATA } from "./data";
 
 export const List = (): JSX.Element => {
   const [todos, setTodos] = useState<TodoItem[]>([]);
 
+  console.log(todos);
+
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((response) => response.json())
-      .then((json) => setTodos(json));
+    // it's like
+    setTodos(DATA);
   }, []);
 
-  const removeTodoFromState = (id: number) => {
+  const removeTodo = (id: string) => {
     setTodos((prevState) => prevState.filter((item) => id !== item.id));
   };
 
-  const addTodoToState = (item: TodoItem) => {
+  const addTodo = (item: TodoItem) => {
     setTodos((prevState) => [item, ...prevState]);
+  };
+
+  const completedToggle = (id: string) => {
+    setTodos((prevState) =>
+      prevState.map((item) => {
+        if (id === item.id) {
+          const newItem = {
+            ...item,
+            completed: !item.completed,
+          };
+          return newItem;
+        }
+        return item;
+      })
+    );
   };
 
   return (
     <div className="list">
-      <AddListItem addTodoToState={addTodoToState} />
+      <AddListItem addTodo={addTodo} />
       <div className="list-items">
-        {todos.map((item) => (
-          <ListItem
-            key={item.id}
-            item={item}
-            removeTodoFromState={removeTodoFromState}
-          />
-        ))}
+        {todos.length === 0 ? (
+          <span className="placeholder">No any tasks</span>
+        ) : (
+          todos.map((item) => (
+            <ListItem
+              key={item.id}
+              item={item}
+              removeTodo={removeTodo}
+              completedToggle={completedToggle}
+            />
+          ))
+        )}
       </div>
     </div>
   );
