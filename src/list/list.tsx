@@ -7,10 +7,8 @@ import { DATA } from "./data";
 export const List = (): JSX.Element => {
   const [todos, setTodos] = useState<TodoItem[]>([]);
 
-  console.log(todos);
-
   useEffect(() => {
-    // it's like
+    // it's like a request to the server
     setTodos(DATA);
   }, []);
 

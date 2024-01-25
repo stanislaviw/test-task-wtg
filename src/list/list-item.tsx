@@ -16,11 +16,14 @@ export const ListItem = ({
 }: ListItemProps): JSX.Element => {
   // const [isEdit, setIsEdit] = useState<boolean>(false);
 
-  const { completed, title, id } = item;
+  const { completed, title, id, date } = item;
 
   return (
     <div className="list-item">
-      <p>{title}</p>
+      <div>
+        <p>{title}</p>
+        <p>{date ? date : "Without date"}</p>
+      </div>
       <div className="button-box">
         <Button onClick={() => console.log("lol")} type="blue">
           Edit
