@@ -3,7 +3,6 @@ import { Button } from "../common/button";
 import { v4 as uuidv4 } from "uuid";
 import { DatePicker } from "@mui/x-date-pickers";
 import { TodoItem } from "./definitions";
-import dayjs from "dayjs";
 
 type AddListItemProps = {
   addTodo: (item: TodoItem) => void;
@@ -16,15 +15,11 @@ export const AddListItem = ({ addTodo }: AddListItemProps): JSX.Element => {
   const handleClickButton = (value: string, dateValue: Date | null): void => {
     const newId: string = uuidv4();
 
-    const formattedDate: string = date
-      ? dayjs(dateValue).format("YYYY-MM-DD")
-      : "";
-
     const newTodo: TodoItem = {
       id: newId,
       title: value,
       completed: false,
-      date: formattedDate,
+      date: dateValue,
     };
 
     addTodo(newTodo);

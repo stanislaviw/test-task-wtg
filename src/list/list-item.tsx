@@ -24,9 +24,10 @@ export const ListItem = ({
 
   const { completed, title, id, date } = item;
 
+  const formattedDate: string = date ? dayjs(date).format("YYYY-MM-DD") : "";
+
   useEffect(() => {
-    const newDate: Date | null = date ? dayjs(date).toDate() : null;
-    setNewDate(newDate);
+    setNewDate(date);
     setText(title);
   }, [date, title]);
 
@@ -34,13 +35,9 @@ export const ListItem = ({
     setTodos((prevState) =>
       prevState.map((item) => {
         if (item.id === id) {
-          const formattedDate: string = newDate
-            ? dayjs(newDate).format("YYYY-MM-DD")
-            : "";
-
           const newItem: TodoItem = {
             ...item,
-            date: formattedDate,
+            date: newDate,
             title: text,
           };
 
@@ -78,7 +75,7 @@ export const ListItem = ({
         <>
           <div>
             <p>{title}</p>
-            <p>{date ? date : "Without date"}</p>
+            <p>{date ? formattedDate : "Without date"}</p>
           </div>
           <div className="button-box">
             <Button onClick={() => setIsEdit(true)} type="blue">
