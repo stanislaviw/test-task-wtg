@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Button } from "../common/button";
 import { v4 as uuidv4 } from "uuid";
 import { DatePicker } from "@mui/x-date-pickers";
-import { format as dateFormat, parseISO } from "date-fns";
 import { TodoItem } from "./definitions";
+import dayjs from "dayjs";
 
 type AddListItemProps = {
   addTodo: (item: TodoItem) => void;
@@ -11,30 +11,25 @@ type AddListItemProps = {
 
 export const AddListItem = ({ addTodo }: AddListItemProps): JSX.Element => {
   const [text, setText] = useState<string>("");
-  const [date, setDate] = useState<string | null>(null);
+  const [date, setDate] = useState<Date | null>(null);
 
-  const handleClickButton = (value: string, date: string | null): void => {
-    const newId = uuidv4();
+  const handleClickButton = (value: string, dateValue: Date | null): void => {
+    const newId: string = uuidv4();
+
+    const formattedDate: string = date
+      ? dayjs(dateValue).format("YYYY-MM-DD")
+      : "";
 
     const newTodo: TodoItem = {
       id: newId,
       title: value,
       completed: false,
-      date: date ? date : "",
+      date: formattedDate,
     };
 
     addTodo(newTodo);
-
     setText("");
     setDate(null);
-  };
-
-  const handleChangeDate = (value): void => {
-    const date = value.format();
-
-    const formettedDate = date ? dateFormat(parseISO(date), "yyyy-MM-dd") : "";
-
-    setDate(formettedDate);
   };
 
   return (
@@ -45,7 +40,7 @@ export const AddListItem = ({ addTodo }: AddListItemProps): JSX.Element => {
         onChange={(e) => setText(e.target.value)}
         value={text}
       />
-      <DatePicker value={date} onChange={handleChangeDate} />
+      <DatePicker value={date} onChange={(value) => setDate(value)} />
       <Button
         onClick={() => handleClickButton(text, date)}
         type="green"

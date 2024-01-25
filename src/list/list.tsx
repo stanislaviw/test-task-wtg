@@ -48,6 +48,7 @@ export const List = (): JSX.Element => {
               item={item}
               removeTodo={removeTodo}
               completedToggle={completedToggle}
+              setTodos={setTodos}
             />
           ))
         )}

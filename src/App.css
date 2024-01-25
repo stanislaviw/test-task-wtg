@@ -112,15 +112,16 @@
 .checkbox {
   height: 45px;
   width: 45px;
-  border: 1px solid #7255CE;
+  border: 1px solid #50DD89;
   cursor: pointer;
   border-radius: 10px;
   position: relative;
+  background-color: #fff;
 
 }
 
 .checkbox-checked {
-  background-color: #7255CE;
+  background-color: #50DD89;
 }
 
 .checkbox-checked::before {
@@ -146,7 +147,18 @@
   width: 100%;
 }
 
+
 .placeholder {
   width: 100%;
   text-align: center;
+}
+
+.edit-input {
+  background-color: #fff;
+}
+
+.edit-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
